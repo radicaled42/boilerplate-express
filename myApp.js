@@ -1,5 +1,6 @@
 let express = require("express");
 let app = express();
+require("dotenv").config();
 
 console.log("Hello Express");
 
@@ -18,7 +19,17 @@ app.get("/", (req, res) => {
   res.sendFile(absolutePath);
 });
 
+const mySecret = process.env["MESSAGE_STYLE"];
+
+if (mySecret === "uppercase") {
+  message = "Hello json".toUpperCase();
+} else {
+  message = "Hello json";
+}
+
+console.log(message);
+
 // Simple API request
 app.get("/json", (req, res) => {
-  res.json({ message: "Hello json" });
+  res.json({ message: message });
 });
