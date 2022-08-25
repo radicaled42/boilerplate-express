@@ -10,6 +10,12 @@ absolutePath = __dirname + "/views/index.html";
 
 console.log(absolutePath);
 
+// Loggin function
+app.use(function (req, res, next) {
+  console.log(`${req.method} ${req.path} - ${req.ip}`);
+  next();
+});
+
 // Add static path to use the files under /public
 app.use("/public", express.static(__dirname + "/public"));
 
@@ -26,9 +32,4 @@ app.get("/json", (req, res) => {
     response = "Hello json".toUpperCase();
   }
   res.json({ message: response });
-});
-
-app.use(function (req, res, next) {
-  console.log(`${req.method} ${req.path} - ${req.ip}`);
-  next();
 });
