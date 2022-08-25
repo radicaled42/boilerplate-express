@@ -19,7 +19,8 @@ app.use(function (req, res, next) {
 });
 
 // Use body-parser to Parse POST Requests
-app.use("/", bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Add static path to use the files under /public
 app.use("/public", express.static(__dirname + "/public"));
@@ -60,4 +61,10 @@ app.get("/:word/echo", (req, res) => {
 app.get("/name", (req, res) => {
   // console.log(`${req.query.first}`);
   res.json({ name: `${req.query.first} ${req.query.last}` });
+});
+
+// Get Data from POST Requests
+app.post("/name", (req, res) => {
+  console.log(req.body);
+  res.json({ name: `${req.body.first} ${req.body.last}` });
 });
