@@ -34,13 +34,14 @@ app.get("/json", (req, res) => {
   res.json({ message: response });
 });
 
+// Now handler - Chain Middleware to Create a Time Server
 app.get(
   "/now",
   function (req, res, next) {
-    req.time = new Date().toString();
+    req.time = { time: new Date().toString() };
     next();
   },
   function (req, res) {
-    res.send(req.time);
+    res.json(req.time);
   }
 );
