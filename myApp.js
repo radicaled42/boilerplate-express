@@ -19,17 +19,13 @@ app.get("/", (req, res) => {
   res.sendFile(absolutePath);
 });
 
-const mySecret = process.env["MESSAGE_STYLE"];
-
-if (mySecret === "uppercase") {
-  message = "Hello json".toUpperCase();
+if (process.env["MESSAGE_STYLE"] === "uppercase") {
+  response = "Hello json".toUpperCase();
 } else {
-  message = "Hello json";
+  response = "Hello json";
 }
-
-console.log(message);
 
 // Simple API request
 app.get("/json", (req, res) => {
-  res.json({ message: message });
+  res.json({ message: response });
 });
