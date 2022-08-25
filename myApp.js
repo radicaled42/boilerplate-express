@@ -19,13 +19,11 @@ app.get("/", (req, res) => {
   res.sendFile(absolutePath);
 });
 
-if (process.env["MESSAGE_STYLE"] === "uppercase") {
-  response = "Hello json".toUpperCase();
-} else {
-  response = "Hello json";
-}
-
 // Simple API request
 app.get("/json", (req, res) => {
+  let response = "Hello json";
+  if (process.env["MESSAGE_STYLE"] === "uppercase") {
+    response = "Hello json".toUpperCase();
+  }
   res.json({ message: response });
 });
